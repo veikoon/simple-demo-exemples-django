@@ -1,0 +1,14 @@
+<h3>Book</h3>
+
+<form method="post">
+    {% csrf_token %}
+    <input type="text" name="name" placeholder="Name">
+    <input type="text" name="autor" placeholder="Autor">
+    <input type="number" name="price" placeholder="Price">
+    <input type="number" name="stock" placeholder="Stock">
+    <button type="submit">Add book</button>
+</form>
+
+{% for book in books %}
+<li>{{ book.name }}</li>
+{% endfor %}
