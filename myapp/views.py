@@ -1,13 +1,21 @@
 from django.shortcuts import render
 from myapp.forms import BookForm
+from django.http.response import  HttpResponseRedirect
 
 from myapp.models import Book
+import logging
 
 # Create your views here.
 
+logger = logging.getLogger(__name__)
+
 def home(request):
     template_name = 'home.html'
-    context = {}
+    try:
+        last_book = "Dernier livre ajouté : " + request.session["last_book_created"]
+    except:
+        last_book = "Pas de livre récemment ajouté"
+    context = {"message": last_book}
     return render(request, template_name, context)
 
 def addBook(request):
@@ -21,7 +29,10 @@ def addBook(request):
                 price = form.cleaned_data["price"],
                 stock = form.cleaned_data["stock"]
             )
-            print(form.cleaned_data["autor"])
+            request.session["last_book_created"] = form.cleaned_data["name"]
+        else:
+            logger.warning("Mauvais formulaire")
+        return HttpResponseRedirect(request.path_info)
     all_books = Book.objects.all()
     context = {"books": all_books}
     return render(request, template_name, context)
