@@ -11,9 +11,9 @@ logger = logging.getLogger(__name__)
 
 def home(request):
     template_name = 'home.html'
-    try:
+    if request.session.get('last_book_created', False):
         last_book = "Dernier livre ajouté : " + request.session["last_book_created"]
-    except:
+    else:
         last_book = "Pas de livre récemment ajouté"
     context = {"message": last_book}
     return render(request, template_name, context)
