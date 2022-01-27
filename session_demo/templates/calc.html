@@ -1,0 +1,49 @@
+{% load %}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+<h1 class="text-center">Calculator</h1>
+<div class="container">
+
+    <form class="input-group mt-4" method="post">
+        {% csrf_token %}
+        <select class="form-select" name="sign">
+            <option value="+">Addition</option>
+            <option value="-">Substraction</option>
+            <option value="x">Multiplication</option>
+            <option value="/">Division</option>
+        </select>
+        <input class="form-control" type="number" name="value" placeholder="Value">
+        <button class="btn btn-primary" type="submit">Calculate</button>
+    </form>
+
+    <h2 class="text-center mt-4">Total : {{ total }}</h2>
+
+    <form class="text-center mt-4" method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-secondary" name="reset">Reset history</button>
+    </form>
+
+    
+
+    <div class="d-flex justify-content-center mt-4  ">
+        <table class="table w-auto text-center">
+            <thead>
+                <tr>
+                    <th scope="col" class="col-auto">Total</th>
+                    <th scope="col" class="col-auto">Operation</th>
+                    <th scope="col" class="col-auto">Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for operation in operations %}
+                <tr>
+                    <td scope="row">{{ operation.total }}</td>
+                    <td>{{ operation.sign }}</td>
+                    <td>{{ operation.value }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</div>

@@ -1,8 +1,7 @@
 from email.policy import default
 from django.db import models
 
-# Create your models here.
-
+# Book model that will be used to create the table in the database
 class Book(models.Model):
     name = models.CharField(max_length=100)
     autor = models.CharField(max_length=100)

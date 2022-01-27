@@ -31,7 +31,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'myapp',
+    'post_demo',
+    'session_demo',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
