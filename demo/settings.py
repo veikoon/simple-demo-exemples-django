@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'post_demo',
     'session_demo',
     'quizz_demo',
+    'sub_model_demo',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
